@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoalKeepers.EntityFrameWork", "GoalKeepers.EntityFrameWork\GoalKeepers.EntityFrameWork.csproj", "{6D372A90-E62B-4E82-92FE-836E5B5467ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoalKeepers.WPF", "GoalKeepers.WPF\GoalKeepers.WPF.csproj", "{12A85C6D-D324-451E-B3C7-7222097B4F07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D372A90-E62B-4E82-92FE-836E5B5467ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D372A90-E62B-4E82-92FE-836E5B5467ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D372A90-E62B-4E82-92FE-836E5B5467ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D372A90-E62B-4E82-92FE-836E5B5467ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12A85C6D-D324-451E-B3C7-7222097B4F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12A85C6D-D324-451E-B3C7-7222097B4F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12A85C6D-D324-451E-B3C7-7222097B4F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12A85C6D-D324-451E-B3C7-7222097B4F07}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8136D910-73C6-490C-9F0E-D4FF131577BE}
+	EndGlobalSection
+EndGlobal

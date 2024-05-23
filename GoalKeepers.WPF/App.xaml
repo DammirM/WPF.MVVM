@@ -1,0 +1,23 @@
+﻿<Application x:Class="GoalKeepers.WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewmodel="clr-namespace:GoalKeepers.WPF.ViewModels"
+             xmlns:views="clr-namespace:GoalKeepers.WPF.Views"
+             xmlns:local="clr-namespace:GoalKeepers.WPF">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/CommonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate DataType="{x:Type viewmodel:NameViewModel}">
+                <views:NameView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:AttributesViewModel}">
+                <views:AttributesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodel:HeightViewModel}">
+                <views:HeightView/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
