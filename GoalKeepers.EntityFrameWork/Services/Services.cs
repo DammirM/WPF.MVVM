@@ -43,6 +43,16 @@ namespace GoalKeepers.EntityFrameWork.Services
             return await _dbContext.keepers.ToListAsync();
         }
 
+        public async Task<GoalKeeperData> GetByHeight(int height)
+        {
+            var getByHeight = await _dbContext.keepers.FirstOrDefaultAsync(x => x.Height == height);
+            if (getByHeight == null)
+            {
+                return getByHeight;
+            }
+            return null;
+        }
+
         public async Task<GoalKeeperData> GetByName(string lastName)
         {
             var getById = await _dbContext.keepers.FirstOrDefaultAsync(x => x.LastName == lastName);

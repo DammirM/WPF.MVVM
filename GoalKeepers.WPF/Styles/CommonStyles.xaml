@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--Colors-->
-    <Color x:Key="ColorPrimary1">red</Color>
-    <Color x:Key="ColorPrimary2">green</Color>
+    <Color x:Key="ColorPrimary1">#0C3DE1</Color>
+    <Color x:Key="ColorPrimary2">#5170DB</Color>
 
     <!--brushes-->
     <SolidColorBrush x:Key="BrushPrimary1" Color="{StaticResource ColorPrimary1}"/>

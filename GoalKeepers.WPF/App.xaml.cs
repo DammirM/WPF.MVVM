@@ -18,7 +18,7 @@ namespace GoalKeepers.WPF
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            Window window = new MainWindow();
+            MainWindow window = new MainWindow();
             window.DataContext = new MainViewModel();
             window.Show();
             base.OnStartup(e);

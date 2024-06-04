@@ -9,12 +9,15 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="51.923"/>
+            <RowDefinition Height="Auto" MinHeight="25.96"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="GoalKeepers" Background="{StaticResource BrushPrimary1}" FontSize="24" TextAlignment="Center"/>
-        <Grid Grid.Row="1" Background="{StaticResource BrushPrimary2}">
+        <TextBlock Grid.Row="0" Padding="10" Text="GoalKeepers" Foreground="White" Background="{StaticResource BrushPrimary1}" FontSize="24" TextAlignment="Center" Margin="0,0,0,26" Grid.RowSpan="2"/>
+        <Grid Grid.Row="1" RenderOptions.EdgeMode="Aliased" Background="{StaticResource BrushPrimary2}">
+            <Grid.Resources>
+                <Style TargetType="RadioButton" BasedOn="{StaticResource NavButton}"/>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -23,10 +26,10 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Search by =>" Margin="5" HorizontalAlignment="Left"/>
-            <RadioButton Grid.Column="2" Content="Name" Margin="5" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Name}"/>
-            <RadioButton Grid.Column="3" Content="Attributes" Margin="5" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Attributes}"/>
-            <RadioButton Grid.Column="4" Content="Height" Margin="5" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Height}"/>
+            <TextBlock Grid.Column="0" Text="Search by =>" Margin="5" FontSize="16" Foreground="White" HorizontalAlignment="Left"/>
+            <RadioButton Grid.Column="2" Content="Name" Foreground="White" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Name}"/>
+            <RadioButton Grid.Column="3" Content="Attributes"  Foreground="White" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Attributes}"/>
+            <RadioButton Grid.Column="4" Content="Height"  Foreground="White" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Height}"/>
         </Grid>
     </Grid>
 </UserControl>
