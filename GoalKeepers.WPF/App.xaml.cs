@@ -1,4 +1,5 @@
-﻿using GoalKeepers.WPF.ViewModels;
+﻿using GoalKeepers.WPF.Store;
+using GoalKeepers.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,12 +16,22 @@ namespace GoalKeepers.WPF
     public partial class App : Application
     {
 
+        private readonly SelectedGoalKeeperViewerStore _selectedGoalKeeperViewerStore;
+
+        public App()
+        {
+            _selectedGoalKeeperViewerStore= new SelectedGoalKeeperViewerStore();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            MainWindow window = new MainWindow();
-            window.DataContext = new MainViewModel();
-            window.Show();
+            MainWindow = new MainWindow()
+            { 
+                DataContext = new GoalKeeperViewersViewModel(_selectedGoalKeeperViewerStore) 
+            };
+
+            MainWindow.Show();
             base.OnStartup(e);
         }
     }

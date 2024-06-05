@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GoalKeepers.WPF.Views
+namespace GoalKeepers.WPF.Components
 {
     /// <summary>
-    /// Interaction logic for NameView.xaml
+    /// Interaction logic for GoalKeeperViewersListing.xaml
     /// </summary>
-    public partial class NameView : UserControl
+    public partial class GoalKeeperViewersListing : UserControl
     {
-        public NameView()
+        public GoalKeeperViewersListing()
         {
             InitializeComponent();
         }

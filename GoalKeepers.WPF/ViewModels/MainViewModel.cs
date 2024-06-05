@@ -1,5 +1,4 @@
-﻿using GoalKeepers.WPF.State.Navigators;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +8,5 @@ namespace GoalKeepers.WPF.ViewModels
 {
     public class MainViewModel : ViewModelBase 
     {
-        public INavigator Navigator { get; set; } = new Navigator();
     }
 }

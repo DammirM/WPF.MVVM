@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GoalKeepers.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for HeightView.xaml
+    /// Interaction logic for GoalKeepersViewersView.xaml
     /// </summary>
-    public partial class HeightView : UserControl
+    public partial class GoalKeepersViewersView : UserControl
     {
-        public HeightView()
+        public GoalKeepersViewersView()
         {
             InitializeComponent();
         }
