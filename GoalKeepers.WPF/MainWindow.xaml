@@ -6,8 +6,14 @@
         xmlns:local="clr-namespace:GoalKeepers.WPF"
         xmlns:views="clr-namespace:GoalKeepers.WPF.Views"
         mc:Ignorable="d"
-        Title="GoaliesData" Height="450" Width="800">
+        Title="GoalKeeper Viewers" Height="450" Width="800" FontSize="14">
     <Grid Margin="25">
-        <views:GoalKeepersViewersView/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel Margin="25">
+            <views:AddGoalKeeperViewerView/>
+            <views:EditGoalKeeperViewerView/>
+        <!--<views:GoalKeeperViewersView/>-->
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

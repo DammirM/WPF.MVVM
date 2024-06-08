@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GoalKeepers.WPF.Views.GoalKeepersViewersView"
+﻿<UserControl x:Class="GoalKeepers.WPF.Views.GoalKeeperViewersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -19,8 +19,9 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" FontSize="32" Text="GoalKeepers View"/>
-            <Button Grid.Column="1" Command="{Binding AddGoalKeeperViewersCommand}" FontSize="16" Content="Add"/>
+            <TextBlock Grid.Column="0" Style="{StaticResource PageHeader}" Text="GoalKeepers View"/>
+            <Button Grid.Column="1" Command="{Binding AddGoalKeeperViewersCommand}"
+                     FontSize="16" Content="Add"/>
         </Grid>
 
         <Grid Grid.Row="1" Margin="0 20 0 0">
@@ -29,8 +30,8 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <components:GoalKeeperViewersListing Grid.Column="0" DataContext="{Binding ListingViewModel}"/>
-            <components:GoalKeeperViewerDetails Grid.Column="1" Margin="20 0 0 0" DataContext="{Binding DetailViewModel}"/>
+            <components:GoalKeeperViewersListing Grid.Column="0" DataContext="{Binding GoalKeeperViewersListingViewModel}"/>
+            <components:GoalKeeperViewersDetails Grid.Column="1" Margin="20 0 0 0" DataContext="{Binding GoalKeeperViewersDetailsViewModel}"/>
         </Grid>
     </Grid>
 </UserControl>

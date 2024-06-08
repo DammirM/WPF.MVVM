@@ -1,4 +1,5 @@
-﻿using GoalKeepers.WPF.Store;
+﻿using GoalKeepers.WPF.Models;
+using GoalKeepers.WPF.Store;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,32 +11,37 @@ namespace GoalKeepers.WPF.ViewModels
 {
     public class GoalKeeperViewersListingViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<GoalKeeperViewersListingItemViewModel> _listingItem;
-        public IEnumerable<GoalKeeperViewersListingItemViewModel> listingItem => _listingItem;
+        private readonly ObservableCollection<GoalKeeperViewersListingItemViewModel> _goalKeeperViewersListingItemViewModel;
+        private readonly SelectedGoalKeeperViewerStore _selectedGoalKeeperViewerStore;
 
-        private GoalKeeperViewersListingItemViewModel _selectedGoalKeeperViewerListingItemViewModel
+        public IEnumerable<GoalKeeperViewersListingItemViewModel> GoalKeeperViewersListingItemViewModel => _goalKeeperViewersListingItemViewModel;
 
-            public GoalKeeperViewersListingViewModel SelectedGoalKeeperViewerListingItemViewModel
+        private GoalKeeperViewersListingItemViewModel _selectedGoalKeeperViewerListingItemViewModel;
+
+            public GoalKeeperViewersListingItemViewModel SelectedGoalKeeperViewerListingItemViewModel
         {
-            get
-            {
-                return _selectedGoalKeeperViewerListingItemViewModel;
-            }
-            set
-            {
-                _selectedGoalKeeperViewerListingItemViewModel = value;
-                OnPropertyChanged(nameof(SelectedGoalKeeperViewerListingItemViewModel));
-            }
-        }
+                get
+                {
+                    return _selectedGoalKeeperViewerListingItemViewModel;
+                }
+                set
+                {
+                    _selectedGoalKeeperViewerListingItemViewModel = value;
+                    OnPropertyChanged(nameof(SelectedGoalKeeperViewerListingItemViewModel));
 
-        public GoalKeeperViewersListingViewModel(SelectedGoalKeeperViewerStore _selectedGoalKeeperStore)
+                _selectedGoalKeeperViewerStore.SelectedGoalKeeperViewer = _selectedGoalKeeperViewerListingItemViewModel?.GoalKeeperViewer;
+                }
+            }
+
+        public GoalKeeperViewersListingViewModel(SelectedGoalKeeperViewerStore selectedGoalKeeperViewerStore)
         {
-            _listingItem = new ObservableCollection<GoalKeeperViewersListingItemViewModel>();
+            this._selectedGoalKeeperViewerStore = selectedGoalKeeperViewerStore;
 
-            _listingItem.Add(new GoalKeeperViewersListingItemViewModel("Dam"));
-            _listingItem.Add(new GoalKeeperViewersListingItemViewModel("Nikki"));
-            _listingItem.Add(new GoalKeeperViewersListingItemViewModel("Sid"));
+            _goalKeeperViewersListingItemViewModel = new ObservableCollection<GoalKeeperViewersListingItemViewModel>();
 
+            _goalKeeperViewersListingItemViewModel.Add(new GoalKeeperViewersListingItemViewModel(new GoalKeeperViewer("Courtois", true, false)));
+            _goalKeeperViewersListingItemViewModel.Add(new GoalKeeperViewersListingItemViewModel(new GoalKeeperViewer("Allison", false, false)));
+            _goalKeeperViewersListingItemViewModel.Add(new GoalKeeperViewersListingItemViewModel(new GoalKeeperViewer("Ter Stegen", true, true)));
         }
     }
 }

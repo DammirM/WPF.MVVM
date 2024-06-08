@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Border BorderBrush="LightGray" BorderThickness="2" CornerRadius="5" SnapsToDevicePixels="True">
+        <Border BorderBrush="{StaticResource BorderPrimary}" BorderThickness="1" CornerRadius="5" SnapsToDevicePixels="True">
             <Grid>
                 <Grid.OpacityMask>
                     <VisualBrush Visual="{Binding ElementName=border}"/>
@@ -17,7 +17,7 @@
                         Background="White"
                         CornerRadius="5"/>
 
-                <ListView BorderThickness="0" ItemsSource="{Binding listingItem}">
+                <ListView BorderThickness="0" SelectedItem="{Binding SelectedGoalKeeperViewerListingItemViewModel}" ItemsSource="{Binding GoalKeeperViewersListingItemViewModel}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

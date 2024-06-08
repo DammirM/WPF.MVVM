@@ -11,14 +11,14 @@ namespace GoalKeepers.WPF.ViewModels
     public class GoalKeeperViewersViewModel : ViewModelBase
     {
 
-        public GoalKeeperViewersListingViewModel ListingViewModel { get; }
-        public GoalKeepersViwersDetailsViewModel DetailViewModel { get;}
+        public GoalKeeperViewersListingViewModel GoalKeeperViewersListingViewModel { get; }
+        public GoalKeeperViewersDetailsViewModel GoalKeeperViewersDetailsViewModel { get;}
         public ICommand AddGoalKeeperViewersCommand { get; }
 
         public GoalKeeperViewersViewModel(SelectedGoalKeeperViewerStore _selectedGoalKeeperStore)
         {
-            ListingViewModel= new GoalKeeperViewersListingViewModel(_selectedGoalKeeperStore);
-            DetailViewModel = new GoalKeepersViwersDetailsViewModel(_selectedGoalKeeperStore);
+            GoalKeeperViewersListingViewModel = new GoalKeeperViewersListingViewModel(_selectedGoalKeeperStore);
+            GoalKeeperViewersDetailsViewModel = new GoalKeeperViewersDetailsViewModel(_selectedGoalKeeperStore);
         }
     }
 }

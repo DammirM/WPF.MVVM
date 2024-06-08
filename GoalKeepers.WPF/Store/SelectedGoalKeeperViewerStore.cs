@@ -1,4 +1,5 @@
 ﻿using GoalKeepers.Domain.Models;
+using GoalKeepers.WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,17 @@ namespace GoalKeepers.WPF.Store
     public class SelectedGoalKeeperViewerStore
     {
 
-        private GoalKeeperData _goalkeepeerdataViewer;
-        public GoalKeeperData GoalKeeperDataViewer
+        private GoalKeeperViewer _selectedGoalKeeperViewer;
+        public GoalKeeperViewer SelectedGoalKeeperViewer
         {
             get
             {
-                return _goalkeepeerdataViewer;
+                return _selectedGoalKeeperViewer;
             }
             set
             {
 
-                _goalkeepeerdataViewer = value;
+                _selectedGoalKeeperViewer = value;
                 SelectedGoalKeeperChanged?.Invoke();
             }
         }
