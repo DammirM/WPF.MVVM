@@ -17,18 +17,21 @@ namespace GoalKeepers.WPF
     {
 
         private readonly SelectedGoalKeeperViewerStore _selectedGoalKeeperViewerStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
 
         public App()
         {
+            _modalNavigationStore= new ModalNavigationStore();
             _selectedGoalKeeperViewerStore= new SelectedGoalKeeperViewerStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
 
+            GoalKeeperViewersViewModel goalKeeperViewersViewModel = new GoalKeeperViewersViewModel(_selectedGoalKeeperViewerStore, _modalNavigationStore);
             MainWindow = new MainWindow()
             { 
-                DataContext = new GoalKeeperViewersViewModel(_selectedGoalKeeperViewerStore) 
+                DataContext = new MainViewModel(_modalNavigationStore, goalKeeperViewersViewModel) 
             };
 
             MainWindow.Show();

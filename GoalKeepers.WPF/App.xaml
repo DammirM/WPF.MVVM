@@ -15,7 +15,7 @@
             <Style TargetType="Button">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="Background" Value="#547AFF"/>
-                <Setter Property="Padding" Value="15 5"/>
+                <Setter Property="Padding" Value="20 8"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -55,6 +55,10 @@
                             </BeginStoryboard>
                         </Trigger.ExitActions>
                     </Trigger>
+
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Opacity" Value="0.7"/>
+                    </Trigger>
                 </Style.Triggers>
             </Style>
 
@@ -69,7 +73,7 @@
                                 <Storyboard>
                                     <ColorAnimation
                                 Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                To="Gray"
+                                To="#adadad"
                                 Duration="0:0:0.1"/>
                                 </Storyboard>
                             </BeginStoryboard>

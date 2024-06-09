@@ -17,9 +17,10 @@ namespace GoalKeepers.WPF.ViewModels
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
 
-        public GoalKeeperViewersListingItemViewModel(GoalKeeperViewer goalKeeperViewer)
+        public GoalKeeperViewersListingItemViewModel(GoalKeeperViewer goalKeeperViewer, ICommand editCommand)
         {
             GoalKeeperViewer = goalKeeperViewer;
+            EditCommand = editCommand;
         }
     }
 }

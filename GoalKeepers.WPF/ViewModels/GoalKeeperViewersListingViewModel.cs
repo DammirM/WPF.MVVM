@@ -1,4 +1,5 @@
-﻿using GoalKeepers.WPF.Models;
+﻿using GoalKeepers.WPF.Commands;
+using GoalKeepers.WPF.Models;
 using GoalKeepers.WPF.Store;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GoalKeepers.WPF.ViewModels
 {
@@ -33,15 +35,22 @@ namespace GoalKeepers.WPF.ViewModels
                 }
             }
 
-        public GoalKeeperViewersListingViewModel(SelectedGoalKeeperViewerStore selectedGoalKeeperViewerStore)
+        public GoalKeeperViewersListingViewModel(SelectedGoalKeeperViewerStore selectedGoalKeeperViewerStore, ModalNavigationStore modalNavigationStore)
         {
             this._selectedGoalKeeperViewerStore = selectedGoalKeeperViewerStore;
 
             _goalKeeperViewersListingItemViewModel = new ObservableCollection<GoalKeeperViewersListingItemViewModel>();
 
-            _goalKeeperViewersListingItemViewModel.Add(new GoalKeeperViewersListingItemViewModel(new GoalKeeperViewer("Courtois", true, false)));
-            _goalKeeperViewersListingItemViewModel.Add(new GoalKeeperViewersListingItemViewModel(new GoalKeeperViewer("Allison", false, false)));
-            _goalKeeperViewersListingItemViewModel.Add(new GoalKeeperViewersListingItemViewModel(new GoalKeeperViewer("Ter Stegen", true, true)));
+            AddGoalKeeper(new GoalKeeperViewer("Courtois", true, false), modalNavigationStore);
+            AddGoalKeeper(new GoalKeeperViewer("Allison", false, false), modalNavigationStore);
+            AddGoalKeeper(new GoalKeeperViewer("Ter Stegen", true, true), modalNavigationStore);
+        }
+
+        private void AddGoalKeeper(GoalKeeperViewer goalKeeperViewer, ModalNavigationStore modalNavigationStore)
+        {
+            ICommand editCommand = new OpenEditGoalKeeperViewerCommand(goalKeeperViewer, modalNavigationStore);
+            _goalKeeperViewersListingItemViewModel.Add(new GoalKeeperViewersListingItemViewModel(goalKeeperViewer, editCommand));
+
         }
     }
 }

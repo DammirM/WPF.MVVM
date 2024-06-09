@@ -4,16 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoalKeepers.WPF"
-        xmlns:views="clr-namespace:GoalKeepers.WPF.Views"
+        xmlns:views="clr-namespace:GoalKeepers.WPF.Views" 
+        xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
+        xmlns:vms="clr-namespace:GoalKeepers.WPF.ViewModels" 
         mc:Ignorable="d"
         Title="GoalKeeper Viewers" Height="450" Width="800" FontSize="14">
-    <Grid Margin="25">
-        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-        <StackPanel Margin="25">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vms:AddGoalKeeperViewerViewModel}">
             <views:AddGoalKeeperViewerView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vms:EditGoalKeeperViewerViewModel}">
             <views:EditGoalKeeperViewerView/>
-        <!--<views:GoalKeeperViewersView/>-->
-            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid >
+            <custom:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
+                <ContentControl  Margin="50 25" Content="{Binding CurrentModalViewModel}"/>
+            </custom:Modal>
+                <views:GoalKeeperViewersView Margin="25" DataContext="{Binding GoalKeeperViewersViewModel}"/>
+            </Grid>
         </ScrollViewer>
-    </Grid>
 </Window>
