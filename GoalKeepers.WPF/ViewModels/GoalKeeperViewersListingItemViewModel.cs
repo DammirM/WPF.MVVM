@@ -1,4 +1,6 @@
-﻿using GoalKeepers.WPF.Models;
+﻿using GoalKeepers.WPF.Commands;
+using GoalKeepers.WPF.Models;
+using GoalKeepers.WPF.Store;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +13,27 @@ namespace GoalKeepers.WPF.ViewModels
 {
     public class GoalKeeperViewersListingItemViewModel : ViewModelBase
     {
-        public GoalKeeperViewer GoalKeeperViewer { get; }
+        private GoalKeeperViewersStore goalKeeperViewersStore;
+        private ModalNavigationStore modalNavigationStore;
+
+        public GoalKeeperViewer GoalKeeperViewer { get; private set; }
         public string LastName => GoalKeeperViewer.LastName;
 
         public ICommand EditCommand { get; }
         public ICommand DeleteCommand { get; }
 
-        public GoalKeeperViewersListingItemViewModel(GoalKeeperViewer goalKeeperViewer, ICommand editCommand)
+        public GoalKeeperViewersListingItemViewModel(GoalKeeperViewer goalKeeperViewer, GoalKeeperViewersStore goalKeeperViewersStore, ModalNavigationStore modalNavigationStore)
         {
             GoalKeeperViewer = goalKeeperViewer;
-            EditCommand = editCommand;
+
+            EditCommand = new OpenEditGoalKeeperViewerCommand(this, goalKeeperViewersStore, modalNavigationStore);
+        }
+
+        public void Update(GoalKeeperViewer goalKeeperViewer)
+        {
+            GoalKeeperViewer = goalKeeperViewer;
+
+            OnPropertyChanged(nameof(LastName));
         }
     }
 }

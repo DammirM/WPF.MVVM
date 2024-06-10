@@ -16,12 +16,12 @@ namespace GoalKeepers.WPF.ViewModels
         public GoalKeeperViewersDetailsViewModel GoalKeeperViewersDetailsViewModel { get;}
         public ICommand AddGoalKeeperViewersCommand { get; }
 
-        public GoalKeeperViewersViewModel(SelectedGoalKeeperViewerStore _selectedGoalKeeperStore, ModalNavigationStore modalNavigationStore)
+        public GoalKeeperViewersViewModel(GoalKeeperViewersStore goalKeeperViewersStore, SelectedGoalKeeperViewerStore _selectedGoalKeeperStore, ModalNavigationStore modalNavigationStore)
         {
-            GoalKeeperViewersListingViewModel = new GoalKeeperViewersListingViewModel(_selectedGoalKeeperStore, modalNavigationStore);
+            GoalKeeperViewersListingViewModel = new GoalKeeperViewersListingViewModel(goalKeeperViewersStore, _selectedGoalKeeperStore, modalNavigationStore);
             GoalKeeperViewersDetailsViewModel = new GoalKeeperViewersDetailsViewModel(_selectedGoalKeeperStore);
 
-            AddGoalKeeperViewersCommand = new OpenAddGoalKeeperViewerCommand(modalNavigationStore);
+            AddGoalKeeperViewersCommand = new OpenAddGoalKeeperViewerCommand(goalKeeperViewersStore, modalNavigationStore);
         }
     }
 }

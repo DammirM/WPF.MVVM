@@ -1,4 +1,6 @@
-﻿using GoalKeepers.WPF.Store;
+﻿using GoalKeepers.WPF.Models;
+using GoalKeepers.WPF.Store;
+using GoalKeepers.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +13,38 @@ namespace GoalKeepers.WPF.Commands
     {
 
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly EditGoalKeeperViewerViewModel _editGoalKeeperViewerViewModel;
+        private readonly GoalKeeperViewersStore _goalKeeperViewersStore;
+        
 
-        public EditGoalKeeperViewerCommand(ModalNavigationStore modalNavigationStore)
+        public EditGoalKeeperViewerCommand(EditGoalKeeperViewerViewModel editGoalKeeperViewerViewModel, GoalKeeperViewersStore goalKeeperViewersStore, ModalNavigationStore modalNavigationStore)
         {
+            _editGoalKeeperViewerViewModel = editGoalKeeperViewerViewModel;
             _modalNavigationStore = modalNavigationStore;
+            _goalKeeperViewersStore= goalKeeperViewersStore;
         }
 
         public override async Task ExecuteAsync(object? parameter)
         {
-            _modalNavigationStore.Close();
+            GoalKeeperViewerDetailsFormViewModel formViewModel = _editGoalKeeperViewerViewModel.GoalKeeperViewerDetailsFormViewModel;
+
+            GoalKeeperViewer goalkeeperViewer = new GoalKeeperViewer(
+                _editGoalKeeperViewerViewModel.GoalKeeperViewerId, 
+                formViewModel.LastName, 
+                formViewModel.Crosses, 
+                formViewModel.GoalLine);
+
+            try
+            {
+                await _goalKeeperViewersStore.Update(goalkeeperViewer);
+
+                _modalNavigationStore.Close();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

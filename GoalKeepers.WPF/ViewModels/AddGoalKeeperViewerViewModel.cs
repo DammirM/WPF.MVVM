@@ -14,10 +14,10 @@ namespace GoalKeepers.WPF.ViewModels
 
         public GoalKeeperViewerDetailsFormViewModel GoalKeeperViewerDetailsFormViewModel { get; }
 
-        public AddGoalKeeperViewerViewModel(ModalNavigationStore modalNavigationStore)
+        public AddGoalKeeperViewerViewModel(GoalKeeperViewersStore goalKeeperViewersStore, ModalNavigationStore modalNavigationStore)
         {
             ICommand cancelCommand = new CloseModalCommand(modalNavigationStore);
-            ICommand submitCommand = new AddGoalKeeperViewerCommand(modalNavigationStore);
+            ICommand submitCommand = new AddGoalKeeperViewerCommand(this, goalKeeperViewersStore, modalNavigationStore);
             GoalKeeperViewerDetailsFormViewModel = new GoalKeeperViewerDetailsFormViewModel(submitCommand, cancelCommand);
         }
     }

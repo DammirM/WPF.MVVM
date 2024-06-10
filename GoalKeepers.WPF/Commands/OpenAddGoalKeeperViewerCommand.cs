@@ -12,17 +12,18 @@ namespace GoalKeepers.WPF.Commands
 {
     public class OpenAddGoalKeeperViewerCommand : CommandBase
     {
-
+        private readonly GoalKeeperViewersStore goalKeeperViewersStore;
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public OpenAddGoalKeeperViewerCommand(ModalNavigationStore modalNavigationStore)
+        public OpenAddGoalKeeperViewerCommand(GoalKeeperViewersStore goalKeeperViewersStore, ModalNavigationStore modalNavigationStore)
         {
+            this.goalKeeperViewersStore = goalKeeperViewersStore;
             _modalNavigationStore = modalNavigationStore;
         }
 
         public override void Execute(object? parameter)
         {
-            AddGoalKeeperViewerViewModel addGoalKeeperViewerViewModel = new AddGoalKeeperViewerViewModel(_modalNavigationStore);
+            AddGoalKeeperViewerViewModel addGoalKeeperViewerViewModel = new AddGoalKeeperViewerViewModel(goalKeeperViewersStore, _modalNavigationStore);
             _modalNavigationStore.CurrentViewModel = addGoalKeeperViewerViewModel;
         }
     }

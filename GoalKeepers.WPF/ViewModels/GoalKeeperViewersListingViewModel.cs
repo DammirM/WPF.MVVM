@@ -14,7 +14,9 @@ namespace GoalKeepers.WPF.ViewModels
     public class GoalKeeperViewersListingViewModel : ViewModelBase
     {
         private readonly ObservableCollection<GoalKeeperViewersListingItemViewModel> _goalKeeperViewersListingItemViewModel;
+        private readonly GoalKeeperViewersStore _goalKeeperViewersStore;
         private readonly SelectedGoalKeeperViewerStore _selectedGoalKeeperViewerStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
 
         public IEnumerable<GoalKeeperViewersListingItemViewModel> GoalKeeperViewersListingItemViewModel => _goalKeeperViewersListingItemViewModel;
 
@@ -35,21 +37,46 @@ namespace GoalKeepers.WPF.ViewModels
                 }
             }
 
-        public GoalKeeperViewersListingViewModel(SelectedGoalKeeperViewerStore selectedGoalKeeperViewerStore, ModalNavigationStore modalNavigationStore)
+        public GoalKeeperViewersListingViewModel(GoalKeeperViewersStore goalKeeperViewersStore, SelectedGoalKeeperViewerStore selectedGoalKeeperViewerStore, ModalNavigationStore modalNavigationStore)
         {
-            this._selectedGoalKeeperViewerStore = selectedGoalKeeperViewerStore;
-
+            _goalKeeperViewersStore = goalKeeperViewersStore;
+            _selectedGoalKeeperViewerStore = selectedGoalKeeperViewerStore;
+            _modalNavigationStore = modalNavigationStore;
             _goalKeeperViewersListingItemViewModel = new ObservableCollection<GoalKeeperViewersListingItemViewModel>();
 
-            AddGoalKeeper(new GoalKeeperViewer("Courtois", true, false), modalNavigationStore);
-            AddGoalKeeper(new GoalKeeperViewer("Allison", false, false), modalNavigationStore);
-            AddGoalKeeper(new GoalKeeperViewer("Ter Stegen", true, true), modalNavigationStore);
+            _goalKeeperViewersStore.GoalKeeperViewerAdded += GoalKeeperViewersStore_GoalKeeperViewerAdded;
+            _goalKeeperViewersStore.GoalKeeperViewerUpdated += GoalKeeperViewersStore_GoalKeeperViewerUpdated;
         }
 
-        private void AddGoalKeeper(GoalKeeperViewer goalKeeperViewer, ModalNavigationStore modalNavigationStore)
+        private void GoalKeeperViewersStore_GoalKeeperViewerUpdated(GoalKeeperViewer goalKeeperViewer)
         {
-            ICommand editCommand = new OpenEditGoalKeeperViewerCommand(goalKeeperViewer, modalNavigationStore);
-            _goalKeeperViewersListingItemViewModel.Add(new GoalKeeperViewersListingItemViewModel(goalKeeperViewer, editCommand));
+            GoalKeeperViewersListingItemViewModel goalKeeperViewerViewModel =
+                _goalKeeperViewersListingItemViewModel.FirstOrDefault(g => g.GoalKeeperViewer.Id == goalKeeperViewer.Id);
+
+            if (goalKeeperViewerViewModel != null) 
+            {
+                goalKeeperViewerViewModel.Update(goalKeeperViewer);
+            }
+        }
+
+        protected override void Dispose()
+        {
+            _goalKeeperViewersStore.GoalKeeperViewerAdded -= GoalKeeperViewersStore_GoalKeeperViewerAdded;
+            _goalKeeperViewersStore.GoalKeeperViewerUpdated -= GoalKeeperViewersStore_GoalKeeperViewerUpdated;
+
+
+
+            base.Dispose(); 
+        }
+        private void GoalKeeperViewersStore_GoalKeeperViewerAdded(GoalKeeperViewer goalKeeperViewer)
+        {
+            AddGoalKeeper(goalKeeperViewer);
+        }
+
+        private void AddGoalKeeper(GoalKeeperViewer goalKeeperViewer)
+        {
+            GoalKeeperViewersListingItemViewModel itemViewModel = new GoalKeeperViewersListingItemViewModel(goalKeeperViewer, _goalKeeperViewersStore, _modalNavigationStore);
+            _goalKeeperViewersListingItemViewModel.Add(itemViewModel);
 
         }
     }

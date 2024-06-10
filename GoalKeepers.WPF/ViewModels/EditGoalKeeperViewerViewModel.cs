@@ -12,13 +12,16 @@ namespace GoalKeepers.WPF.ViewModels
 {
     public class EditGoalKeeperViewerViewModel : ViewModelBase
     {
-
+        public Guid GoalKeeperViewerId { get; }
         public GoalKeeperViewerDetailsFormViewModel GoalKeeperViewerDetailsFormViewModel { get; }
 
-        public EditGoalKeeperViewerViewModel(GoalKeeperViewer goalKeeperViewer, ModalNavigationStore modalNavigationStore)
+        public EditGoalKeeperViewerViewModel(GoalKeeperViewer goalKeeperViewer, GoalKeeperViewersStore goalKeeperViewersStore, ModalNavigationStore modalNavigationStore)
         {
+
+            GoalKeeperViewerId= goalKeeperViewer.Id;
+
             ICommand cancelCommand = new CloseModalCommand(modalNavigationStore);
-            ICommand submitCommand = new EditGoalKeeperViewerCommand(modalNavigationStore);
+            ICommand submitCommand = new EditGoalKeeperViewerCommand(this, goalKeeperViewersStore, modalNavigationStore);
             GoalKeeperViewerDetailsFormViewModel = new GoalKeeperViewerDetailsFormViewModel(submitCommand, cancelCommand)
             {
                 LastName = goalKeeperViewer.LastName,

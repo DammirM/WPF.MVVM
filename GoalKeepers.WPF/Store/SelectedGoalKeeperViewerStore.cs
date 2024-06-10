@@ -11,8 +11,10 @@ namespace GoalKeepers.WPF.Store
 {
     public class SelectedGoalKeeperViewerStore
     {
+        private readonly GoalKeeperViewersStore _goalKeeperViewersStore;
 
         private GoalKeeperViewer _selectedGoalKeeperViewer;
+
         public GoalKeeperViewer SelectedGoalKeeperViewer
         {
             get
@@ -28,5 +30,20 @@ namespace GoalKeepers.WPF.Store
         }
 
         public event Action SelectedGoalKeeperChanged;
+
+        public SelectedGoalKeeperViewerStore(GoalKeeperViewersStore goalKeeperViewersStore)
+        {
+            _goalKeeperViewersStore = goalKeeperViewersStore;
+
+            _goalKeeperViewersStore.GoalKeeperViewerUpdated += GoalKeeperViewersStore_GoalKeeperViewerUpdated;
+        }
+
+        private void GoalKeeperViewersStore_GoalKeeperViewerUpdated(GoalKeeperViewer goalKeeperViewer)
+        {
+            if (goalKeeperViewer.Id == SelectedGoalKeeperViewer?.Id)
+            {
+                SelectedGoalKeeperViewer= goalKeeperViewer;
+            }
+        }
     }
 }

@@ -11,18 +11,23 @@ namespace GoalKeepers.WPF.Commands
 {
     public class OpenEditGoalKeeperViewerCommand: CommandBase
     {
-        private readonly GoalKeeperViewer _goalKeeperViewer;
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly GoalKeeperViewersListingItemViewModel _goalKeeperViewersListingItemViewModel;
+        private readonly GoalKeeperViewersStore _goalKeeperViewersStore;
 
-        public OpenEditGoalKeeperViewerCommand(GoalKeeperViewer goalKeeperViewer, ModalNavigationStore modalNavigationStore)
+        public OpenEditGoalKeeperViewerCommand(GoalKeeperViewersListingItemViewModel goalKeeperViewersListingItemViewModel, GoalKeeperViewersStore goalKeeperViewersStore, ModalNavigationStore modalNavigationStore)
         {
-            _goalKeeperViewer = goalKeeperViewer;
+            _goalKeeperViewersListingItemViewModel = goalKeeperViewersListingItemViewModel;
+            _goalKeeperViewersStore = goalKeeperViewersStore;
             _modalNavigationStore = modalNavigationStore;
         }
 
         public override void Execute(object? parameter)
         {
-            EditGoalKeeperViewerViewModel editGoalKeeperViewerViewModel = new EditGoalKeeperViewerViewModel(_goalKeeperViewer, _modalNavigationStore);
+
+            GoalKeeperViewer goalKeeperViewer = _goalKeeperViewersListingItemViewModel.GoalKeeperViewer;
+
+            EditGoalKeeperViewerViewModel editGoalKeeperViewerViewModel = new EditGoalKeeperViewerViewModel(goalKeeperViewer, _goalKeeperViewersStore, _modalNavigationStore);
             _modalNavigationStore.CurrentViewModel = editGoalKeeperViewerViewModel;
         }
     }
