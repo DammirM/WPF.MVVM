@@ -1,5 +1,6 @@
-﻿using GoalKeepers.WPF.Commands;
-using GoalKeepers.WPF.Models;
+﻿using GoalKeepers.EntityFrameWork.Models;
+using GoalKeepers.WPF.Commands;
+using GoalKeepers.EntityFrameWork.Models;
 using GoalKeepers.WPF.Store;
 using System;
 using System.Collections.Generic;
@@ -25,8 +26,14 @@ namespace GoalKeepers.WPF.ViewModels
             GoalKeeperViewerDetailsFormViewModel = new GoalKeeperViewerDetailsFormViewModel(submitCommand, cancelCommand)
             {
                 LastName = goalKeeperViewer.LastName,
+                Team = goalKeeperViewer.Team,
                 Crosses = goalKeeperViewer.Crosses,
-                GoalLine = goalKeeperViewer.GoalLine,
+                GoalLineKeeper = goalKeeperViewer.GoalLineKeeper,
+                Reflexes = goalKeeperViewer.Reflexes,
+                AttackingKeeper = goalKeeperViewer.AttackingKeeper,
+                GoodWithFeet = goalKeeperViewer.GoodWithFeet,
+                SweeperKeeper = goalKeeperViewer.SweeperKeeper,
+
             };
         }
     }

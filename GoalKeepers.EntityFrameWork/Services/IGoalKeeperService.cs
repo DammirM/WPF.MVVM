@@ -1,4 +1,5 @@
 ﻿using GoalKeepers.Domain.Models;
+using GoalKeepers.EntityFrameWork.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,8 @@ namespace GoalKeepers.Domain.Services
         Task<GoalKeeperData> Create(GoalKeeperData Entity);
         Task<GoalKeeperData> Update(int Id, GoalKeeperData Entity);
         Task<GoalKeeperData> Delete(int Id);
+
+        Task<IEnumerable<GoalKeeperViewer>> Execute();
+
     }
 }

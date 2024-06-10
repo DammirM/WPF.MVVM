@@ -1,4 +1,4 @@
-﻿using GoalKeepers.WPF.Models;
+﻿using GoalKeepers.EntityFrameWork.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

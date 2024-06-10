@@ -1,4 +1,4 @@
-﻿using GoalKeepers.WPF.Models;
+﻿using GoalKeepers.EntityFrameWork.Models;
 using GoalKeepers.WPF.Store;
 using GoalKeepers.WPF.ViewModels;
 using System;

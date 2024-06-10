@@ -1,4 +1,4 @@
-﻿using GoalKeepers.WPF.Models;
+﻿using GoalKeepers.EntityFrameWork.Models;
 using GoalKeepers.WPF.Store;
 using GoalKeepers.WPF.ViewModels;
 using System;
@@ -31,8 +31,13 @@ namespace GoalKeepers.WPF.Commands
             GoalKeeperViewer goalkeeperViewer = new GoalKeeperViewer(
                 _editGoalKeeperViewerViewModel.GoalKeeperViewerId, 
                 formViewModel.LastName, 
+                formViewModel.Team, 
                 formViewModel.Crosses, 
-                formViewModel.GoalLine);
+                formViewModel.GoalLineKeeper, 
+                formViewModel.Reflexes, 
+                formViewModel.AttackingKeeper, 
+                formViewModel.GoodWithFeet, 
+                formViewModel.SweeperKeeper);
 
             try
             {

@@ -39,11 +39,18 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" FontSize="22" Text="{Binding LastName}"/>
 
-                <Grid Grid.Row="1" Margin="0 20 0 0">
+                    <TextBlock Grid.Row="1" Margin="0 10 0 0" Text="{Binding Team}"/>
+
+                    <Grid Grid.Row="2" Margin="0 20 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" SharedSizeGroup="label"/>
                         <ColumnDefinition Width="auto"/>
@@ -53,17 +60,57 @@
                     <TextBlock Grid.Column="1" Margin="20 0 0 0" Text="{Binding Crosses}"/>
                 </Grid>
 
-                <Grid Grid.Row="2" Margin="0 20 0 0">
+                <Grid Grid.Row="3" Margin="0 20 0 0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" SharedSizeGroup="label"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0" FontWeight="Bold" Text="GoalLine"/>
-                    <TextBlock Grid.Column="1" Margin="20 0 0 0" Text="{Binding GoalLine}"/>
+                        <TextBlock Grid.Column="0" FontWeight="Bold" Text="GoalLineKeeper"/>
+                    <TextBlock Grid.Column="1" Margin="20 0 0 0" Text="{Binding GoalLineKeeper}"/>
                 </Grid>
 
-            </Grid>
+                    <Grid Grid.Row="4" Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" SharedSizeGroup="label"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" FontWeight="Bold" Text="Reflexes"/>
+                        <TextBlock Grid.Column="1" Margin="20 0 0 0" Text="{Binding Reflexes}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="5" Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" SharedSizeGroup="label"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" FontWeight="Bold" Text="AttackingKeeper"/>
+                        <TextBlock Grid.Column="1" Margin="20 0 0 0" Text="{Binding AttackingKeeper}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="6" Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" SharedSizeGroup="label"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" FontWeight="Bold" Text="GoodWithFeet"/>
+                        <TextBlock Grid.Column="1" Margin="20 0 0 0" Text="{Binding GoodWithFeet}"/>
+                    </Grid>
+
+                    <Grid Grid.Row="7" Margin="0 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" SharedSizeGroup="label"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" FontWeight="Bold" Text="SweeperKeeper"/>
+                        <TextBlock Grid.Column="1" Margin="20 0 0 0" Text="{Binding SweeperKeeper}"/>
+                    </Grid>
+
+                </Grid>
                 </Grid>
         </Border>
             

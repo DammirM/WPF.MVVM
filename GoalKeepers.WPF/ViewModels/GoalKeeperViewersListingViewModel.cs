@@ -1,5 +1,6 @@
-﻿using GoalKeepers.WPF.Commands;
-using GoalKeepers.WPF.Models;
+﻿using GoalKeepers.EntityFrameWork.Models;
+using GoalKeepers.WPF.Commands;
+using GoalKeepers.EntityFrameWork.Models;
 using GoalKeepers.WPF.Store;
 using System;
 using System.Collections.Generic;

@@ -26,6 +26,22 @@ namespace GoalKeepers.WPF.ViewModels
             }
         }
 
+        private string _team;
+
+        public string Team
+        {
+            get
+            {
+                return _team;
+            }
+            set
+            {
+                _team = value;
+                OnPropertyChanged(nameof(Team));
+                OnPropertyChanged(nameof(CanSubmit));
+            }
+        }
+
         private bool _crosses;
 
         public bool Crosses
@@ -41,20 +57,84 @@ namespace GoalKeepers.WPF.ViewModels
             }
         }
 
-        private bool _goalLine;
+        private bool _goalLineKeeper;
 
-        public bool GoalLine
+        public bool GoalLineKeeper
         {
             get
             {
-                return _goalLine;
+                return _goalLineKeeper;
             }
             set
             {
-                _goalLine = value;
-                OnPropertyChanged(nameof(GoalLine));
+                _goalLineKeeper = value;
+                OnPropertyChanged(nameof(GoalLineKeeper));
             }
         }
+
+        private bool _reflexes;
+
+        public bool Reflexes
+        {
+            get
+            {
+                return _reflexes;
+            }
+            set
+            {
+                _reflexes = value;
+                OnPropertyChanged(nameof(Reflexes));
+            }
+        }
+
+        private bool _attackingKeeper;
+
+        public bool AttackingKeeper
+        {
+            get
+            {
+                return _attackingKeeper;
+            }
+            set
+            {
+                _attackingKeeper = value;
+                OnPropertyChanged(nameof(AttackingKeeper));
+            }
+        }
+
+
+
+        private bool _goodWithFeet;
+
+        public bool GoodWithFeet
+        {
+            get
+            {
+                return _goodWithFeet;
+            }
+            set
+            {
+                _goodWithFeet = value;
+                OnPropertyChanged(nameof(GoodWithFeet));
+            }
+        }
+
+        private bool _sweeperKeeper;
+
+        public bool SweeperKeeper
+        {
+            get
+            {
+                return _sweeperKeeper;
+            }
+            set
+            {
+                _sweeperKeeper = value;
+                OnPropertyChanged(nameof(SweeperKeeper));
+            }
+        }
+
+
 
         public bool CanSubmit => !string.IsNullOrEmpty(LastName);
         public ICommand SubmitCommand { get; set; }
