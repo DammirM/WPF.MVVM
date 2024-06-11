@@ -1,4 +1,7 @@
-﻿using GoalKeepers.WPF.Store;
+﻿using GoalKeepers.Domain.Services;
+using GoalKeepers.EntityFrameWork;
+using GoalKeepers.EntityFrameWork.Services;
+using GoalKeepers.WPF.Store;
 using GoalKeepers.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,11 +22,14 @@ namespace GoalKeepers.WPF
         private readonly SelectedGoalKeeperViewerStore _selectedGoalKeeperViewerStore;
         private readonly GoalKeeperViewersStore _goalKeeperViewersStore;
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly IGoalKeeperService _goalKeeperService;
 
         public App()
         {
             _modalNavigationStore= new ModalNavigationStore();
-            _goalKeeperViewersStore= new GoalKeeperViewersStore();
+            var dbContext = new GoalKeeperViewerDbContext();
+            _goalKeeperService = new Services(dbContext);
+            _goalKeeperViewersStore= new GoalKeeperViewersStore(_goalKeeperService);
             _selectedGoalKeeperViewerStore= new SelectedGoalKeeperViewerStore(_goalKeeperViewersStore);
         }
 

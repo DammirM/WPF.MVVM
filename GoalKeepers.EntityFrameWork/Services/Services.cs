@@ -1,90 +1,115 @@
-﻿using GoalKeepers.Domain.Models;
-using GoalKeepers.Domain.Services;
+﻿using GoalKeepers.Domain.Services;
+using GoalKeepers.EntityFrameWork.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using GoalKeepers.EntityFrameWork.Models;
 
 namespace GoalKeepers.EntityFrameWork.Services
 {
     public class Services : IGoalKeeperService
     {
+        private readonly GoalKeeperViewerDbContext _dbContext;
 
-        private readonly GoalKeeperDataDbContext _dbContext;
-
-        public Services(GoalKeeperDataDbContext dbContext)
+        public Services(GoalKeeperViewerDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<GoalKeeperData> Create(GoalKeeperData Entity)
+        public async Task<GoalKeeperViewer> Create(GoalKeeperViewer entity)
         {
-            var createKeeper = await _dbContext.AddAsync(Entity);
+            var dto = new GoalKeeperViewerDto
+            {
+                Id = entity.Id,
+                LastName = entity.LastName,
+                Team = entity.Team,
+                Crosses = entity.Crosses,
+                GoalLineKeeper = entity.GoalLineKeeper,
+                Reflexes = entity.Reflexes,
+                AttackingKeeper = entity.AttackingKeeper,
+                GoodWithFeet = entity.GoodWithFeet,
+                SweeperKeeper = entity.SweeperKeeper
+            };
+
+             _dbContext.GoalKeeperViewers.AddAsync(dto);
             await _dbContext.SaveChangesAsync();
-            return createKeeper.Entity;
+
+            return entity;
         }
 
-        public async Task<GoalKeeperData> Delete(int Id)
+        public async Task<GoalKeeperViewer> Delete(Guid id)
         {
-            var keeperToDelete = await _dbContext.keepers.FirstOrDefaultAsync(x => x.ID == Id);
+            var keeperToDelete = await _dbContext.GoalKeeperViewers.FirstOrDefaultAsync(x => x.Id == id);
             if (keeperToDelete != null)
             {
-                _dbContext.keepers.Remove(keeperToDelete);
+                _dbContext.GoalKeeperViewers.Remove(keeperToDelete);
                 await _dbContext.SaveChangesAsync();
-                return keeperToDelete;
+
+                return new GoalKeeperViewer(
+                    keeperToDelete.Id,
+                    keeperToDelete.LastName,
+                    keeperToDelete.Team,
+                    keeperToDelete.Crosses,
+                    keeperToDelete.GoalLineKeeper,
+                    keeperToDelete.Reflexes,
+                    keeperToDelete.AttackingKeeper,
+                    keeperToDelete.GoodWithFeet,
+                    keeperToDelete.SweeperKeeper);
             }
             return null;
         }
 
-        public async Task<IEnumerable<GoalKeeperData>> GetAll()
+        public Task<IEnumerable<GoalKeeperViewer>> Execute()
         {
-            return await _dbContext.keepers.ToListAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<GoalKeeperData> GetByHeight(int height)
+        public async Task<IEnumerable<GoalKeeperViewer>> GetAll()
         {
-            var getByHeight = await _dbContext.keepers.FirstOrDefaultAsync(x => x.Height == height);
-            if (getByHeight == null)
-            {
-                return getByHeight;
-            }
-            return null;
+            var goalKeeperViewersDto = await _dbContext.GoalKeeperViewers.ToListAsync();
+            return goalKeeperViewersDto.Select(g => new GoalKeeperViewer(
+                g.Id,
+                g.LastName,
+                g.Team,
+                g.Crosses,
+                g.GoalLineKeeper,
+                g.Reflexes,
+                g.AttackingKeeper,
+                g.GoodWithFeet,
+                g.SweeperKeeper));
         }
 
-        public async Task<GoalKeeperData> GetByName(string lastName)
+        public async Task<GoalKeeperViewer> Update(GoalKeeperViewer entity)
         {
-            var getById = await _dbContext.keepers.FirstOrDefaultAsync(x => x.LastName == lastName);
-            if (getById == null)
-            {
-                return getById;
-            }
-            return null;
-        }
-
-        public async Task<GoalKeeperData> Update(int Id, GoalKeeperData Entity)
-        {
-            var updateKeeper = await _dbContext.keepers.FirstOrDefaultAsync(x => x.ID == Entity.ID);
+            var updateKeeper = await _dbContext.GoalKeeperViewers.FirstOrDefaultAsync(x => x.Id == entity.Id);
             if (updateKeeper != null)
             {
-                updateKeeper.GoodFeet = Entity.GoodFeet;
-                updateKeeper.GoalLine = Entity.GoalLine;
-                updateKeeper.Crosses = Entity.Crosses;
-                updateKeeper.Reflexes = Entity.Reflexes;
-                updateKeeper.AttackingKeeper = Entity.AttackingKeeper;
-                updateKeeper.FirstName = Entity.FirstName;
-                updateKeeper.LastName = Entity.LastName;
-                updateKeeper.Team = Entity.Team;
-                updateKeeper.Height = Entity.Height;
-                updateKeeper.SweeperKeeper = Entity.SweeperKeeper;
+                updateKeeper.LastName = entity.LastName;
+                updateKeeper.Team = entity.Team;
+                updateKeeper.Crosses = entity.Crosses;
+                updateKeeper.GoalLineKeeper = entity.GoalLineKeeper;
+                updateKeeper.AttackingKeeper = entity.AttackingKeeper;
+                updateKeeper.SweeperKeeper = entity.SweeperKeeper;
+                updateKeeper.Reflexes = entity.Reflexes;
+                updateKeeper.GoodWithFeet = entity.GoodWithFeet;
 
                 await _dbContext.SaveChangesAsync();
 
-
-                return updateKeeper;
+                return new GoalKeeperViewer(
+                    updateKeeper.Id,
+                    updateKeeper.LastName,
+                    updateKeeper.Team,
+                    updateKeeper.Crosses,
+                    updateKeeper.GoalLineKeeper,
+                    updateKeeper.Reflexes,
+                    updateKeeper.AttackingKeeper,
+                    updateKeeper.GoodWithFeet,
+                    updateKeeper.SweeperKeeper);
             }
             return null;
         }
+
     }
 }

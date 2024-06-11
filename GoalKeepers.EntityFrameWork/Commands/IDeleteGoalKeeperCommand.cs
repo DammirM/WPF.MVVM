@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GoalKeepers.EntityFrameWork.Commands
 {
-    internal interface IDeleteGoalKeeperCommand
+    public interface IDeleteGoalKeeperCommand
     {
+        Task Execute(Guid Id);
     }
 }

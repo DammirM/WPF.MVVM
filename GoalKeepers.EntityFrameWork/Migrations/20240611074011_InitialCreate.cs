@@ -1,40 +1,38 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace GoalKeepers.EntityFrameWork.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "keepers",
+                name: "GoalKeeperViewers",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Team = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Height = table.Column<int>(type: "int", nullable: false),
                     Crosses = table.Column<bool>(type: "bit", nullable: false),
-                    GoalLine = table.Column<bool>(type: "bit", nullable: false),
+                    GoalLineKeeper = table.Column<bool>(type: "bit", nullable: false),
                     SweeperKeeper = table.Column<bool>(type: "bit", nullable: false),
-                    GoodFeet = table.Column<bool>(type: "bit", nullable: false),
+                    GoodWithFeet = table.Column<bool>(type: "bit", nullable: false),
                     Reflexes = table.Column<bool>(type: "bit", nullable: false),
                     AttackingKeeper = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_keepers", x => x.ID);
+                    table.PrimaryKey("PK_GoalKeeperViewers", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "keepers");
+                name: "GoalKeeperViewers");
         }
     }
 }

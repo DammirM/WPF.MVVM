@@ -1,4 +1,4 @@
-﻿using GoalKeepers.Domain.Models;
+﻿using GoalKeepers.EntityFrameWork.DTOs;
 using GoalKeepers.EntityFrameWork.Models;
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,14 @@ namespace GoalKeepers.Domain.Services
 {
     public interface IGoalKeeperService
     {
-        Task<IEnumerable<GoalKeeperData>> GetAll();
-        Task<GoalKeeperData> GetByName(string lastName);
-        Task<GoalKeeperData> GetByHeight(int height);
-        Task<GoalKeeperData> Create(GoalKeeperData Entity);
-        Task<GoalKeeperData> Update(int Id, GoalKeeperData Entity);
-        Task<GoalKeeperData> Delete(int Id);
+
+        // CRUD
+        Task<IEnumerable<GoalKeeperViewer>> GetAll();
+        Task<GoalKeeperViewer> Create(GoalKeeperViewer Entity);
+        Task<GoalKeeperViewer> Update(GoalKeeperViewer Entity);
+        Task<GoalKeeperViewer> Delete(Guid id);
+
+        // Query
 
         Task<IEnumerable<GoalKeeperViewer>> Execute();
 

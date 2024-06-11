@@ -38,6 +38,8 @@ namespace GoalKeepers.WPF.ViewModels
                 }
             }
 
+        public ICommand LoadGoalKeepersCommand { get; }
+
         public GoalKeeperViewersListingViewModel(GoalKeeperViewersStore goalKeeperViewersStore, SelectedGoalKeeperViewerStore selectedGoalKeeperViewerStore, ModalNavigationStore modalNavigationStore)
         {
             _goalKeeperViewersStore = goalKeeperViewersStore;
@@ -45,10 +47,42 @@ namespace GoalKeepers.WPF.ViewModels
             _modalNavigationStore = modalNavigationStore;
             _goalKeeperViewersListingItemViewModel = new ObservableCollection<GoalKeeperViewersListingItemViewModel>();
 
+            LoadGoalKeepersCommand = new LoadGoalKeeperViewersCommand(goalKeeperViewersStore);
+
+            _goalKeeperViewersStore.GoalkeepersVirwersLoaded += GoalKeeperViewersStore_GoalkeepersVirwersLoaded;
             _goalKeeperViewersStore.GoalKeeperViewerAdded += GoalKeeperViewersStore_GoalKeeperViewerAdded;
             _goalKeeperViewersStore.GoalKeeperViewerUpdated += GoalKeeperViewersStore_GoalKeeperViewerUpdated;
+            _goalKeeperViewersStore.GoalKeeperViewerDeleted += GoalKeeperViewersStore_GoalKeeperViewerDeleted;
         }
 
+        private void GoalKeeperViewersStore_GoalKeeperViewerDeleted(Guid id)
+        {
+           var itemViewModel = _goalKeeperViewersListingItemViewModel.FirstOrDefault(g => g.GoalKeeperViewer?.Id == id);
+
+            if (itemViewModel != null) 
+            {
+                _goalKeeperViewersListingItemViewModel.Remove(itemViewModel); 
+            }
+        }
+
+        private void GoalKeeperViewersStore_GoalkeepersVirwersLoaded()
+        {
+           _goalKeeperViewersListingItemViewModel.Clear();
+
+            foreach (GoalKeeperViewer goalKeeperViewer in _goalKeeperViewersStore.GoalKeeperViewers)
+            {
+                AddGoalKeeper(goalKeeperViewer);
+            }
+        }
+
+        public static GoalKeeperViewersListingViewModel LoadViewModel(GoalKeeperViewersStore goalKeeperViewersStore, SelectedGoalKeeperViewerStore selectedGoalKeeperViewerStore, ModalNavigationStore modalNavigationStore)
+        {
+            GoalKeeperViewersListingViewModel viewModel = new GoalKeeperViewersListingViewModel(goalKeeperViewersStore, selectedGoalKeeperViewerStore, modalNavigationStore);
+
+            viewModel.LoadGoalKeepersCommand.Execute(null);
+
+            return viewModel;
+        }
         private void GoalKeeperViewersStore_GoalKeeperViewerUpdated(GoalKeeperViewer goalKeeperViewer)
         {
             GoalKeeperViewersListingItemViewModel goalKeeperViewerViewModel =
@@ -64,6 +98,8 @@ namespace GoalKeepers.WPF.ViewModels
         {
             _goalKeeperViewersStore.GoalKeeperViewerAdded -= GoalKeeperViewersStore_GoalKeeperViewerAdded;
             _goalKeeperViewersStore.GoalKeeperViewerUpdated -= GoalKeeperViewersStore_GoalKeeperViewerUpdated;
+            _goalKeeperViewersStore.GoalkeepersVirwersLoaded -= GoalKeeperViewersStore_GoalkeepersVirwersLoaded;
+            _goalKeeperViewersStore.GoalKeeperViewerDeleted -= GoalKeeperViewersStore_GoalKeeperViewerDeleted;
 
 
 

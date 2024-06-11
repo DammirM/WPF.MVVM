@@ -28,6 +28,7 @@ namespace GoalKeepers.WPF.ViewModels
             GoalKeeperViewer = goalKeeperViewer;
 
             EditCommand = new OpenEditGoalKeeperViewerCommand(this, goalKeeperViewersStore, modalNavigationStore);
+            DeleteCommand = new DeleteGoalKeeperViewerCommand(this, goalKeeperViewersStore);
         }
 
         public void Update(GoalKeeperViewer goalKeeperViewer)

@@ -1,5 +1,4 @@
-﻿using GoalKeepers.Domain.Models;
-using GoalKeepers.EntityFrameWork.Models;
+﻿using GoalKeepers.EntityFrameWork.Models;
 using GoalKeepers.EntityFrameWork.Models;
 using System;
 using System.Collections.Generic;
